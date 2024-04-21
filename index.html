@@ -806,6 +806,22 @@
                 </div>
             </div>
         </div>
+        <div class="container text-center mt-4">
+            <p>1 Dolar = <span id="dolarKuru">Yükleniyor...</span> TL</p>
+        </div>
+
+        <script>
+            const apiUrl = 'https://api.yapikredi.com.tr/api/investmentrates/v1/currencyRates'; // Currency Rates API URL'sini buraya ekleyin
+        
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const dolarKuru = data.exchangeRateList.find(item => item.majorCurrency === 'USD').sellRate; // Doların satış kuru
+                    document.getElementById('dolarKuru').innerText = dolarKuru.toFixed(4);
+                })
+                .catch(error => console.error('API hatası:', error));
+        </script>
+        
         <!-- Footer End -->
 
 
